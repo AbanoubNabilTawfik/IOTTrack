@@ -1,0 +1,37 @@
+<div class="container">
+    <form #userForm="ngForm" >
+        {{userForm.value |json}}
+        <br>
+        {{userModel|json}}
+        <div class="form-group">
+            <label>Name</label>
+            <input type="text" name="txtName" ngModel [(ngModel)]="userModel.name" class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label>Email</label>
+            <input type="email" name="txtEmail" [(ngModel)]="userModel.email" ngModel class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label>Phone</label>
+            <input type="tel" name="txtEmail" ngModel  [(ngModel)]="userModel.phone" class="form-control">
+        </div>
+
+        <div class="form-group">
+            <select class="custom-select" name="ddlTopics"[(ngModel)]="userModel.topic" ngModel>
+                <option>I'm Interested In ?</option>
+                <option *ngFor="let topic of topics">
+                    {{topic}}
+                </option>
+            </select>
+        </div>
+        <div class="form-check mb-3">
+            <input type="checkbox" class="form-check-input"[(ngModel)]="userModel.chkOffers" name="chkOffers" ngModel>
+            <label class="form-check-label">Send me new offers</label>
+        </div>
+
+        <input type="submit" class="btn btn-primary" value="SUBMIT">
+
+    </form>
+</div>

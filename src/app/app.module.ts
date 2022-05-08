@@ -19,6 +19,10 @@ import { EmployeeDetailsComponent } from './employee-details/employee-details.co
 import {HttpClientModule} from '@angular/common/http';
 import { DepartmentsComponent } from './departments/departments.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { DepartmentDetailsComponent } from './department-details/department-details.component';
+import { OverviewComponent } from './overview/overview.component';
+import { ContactInfoComponent } from './contact-info/contact-info.component';
+import { TdfComponent } from './tdf/tdf.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,7 +39,11 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     EmployeeListComponent,
     EmployeeDetailsComponent,
     DepartmentsComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    DepartmentDetailsComponent,
+    OverviewComponent,
+    ContactInfoComponent,
+    TdfComponent
   ],
   imports: [
     BrowserModule,
