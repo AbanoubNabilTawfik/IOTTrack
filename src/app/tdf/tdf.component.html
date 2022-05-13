@@ -1,25 +1,34 @@
 <div class="container">
-    <form #userForm="ngForm" >
+    <form #userForm="ngForm" novalidate (ngSubmit)="SaveData()" >
         {{userForm.value |json}}
         <br>
         {{userModel|json}}
         <div class="form-group">
             <label>Name</label>
-            <input type="text" name="txtName" ngModel [(ngModel)]="userModel.name" class="form-control">
+            <input type="text" name="txtName" required [class.is-invalid]="name.invalid && name.touched"  #name="ngModel"  [(ngModel)]="userModel.name" class="form-control">
+            <small class="text-danger" [class.d-none]="name.valid || name.untouched">Name is required</small>
         </div>
+
+        <!-- {{name.className}} -->
+        <!-- {{name.touched}} -->
 
         <div class="form-group">
             <label>Email</label>
-            <input type="email" name="txtEmail" [(ngModel)]="userModel.email" ngModel class="form-control">
+            <input type="email" name="txtEmail" [(ngModel)]="userModel.email"  #email="ngModel"  class="form-control">
         </div>
 
         <div class="form-group">
             <label>Phone</label>
-            <input type="tel" name="txtEmail" ngModel  [(ngModel)]="userModel.phone" class="form-control">
+            <input type="tel" name="txtEmail" #phone="ngModel" pattern="^\d{11}$" required [class.is-invalid]="phone.invalid && phone.touched"  [(ngModel)]="userModel.phone" class="form-control">
+        
+           <div *ngIf="phone.errors && phone.touched">
+               <small class="text-danger" *ngIf="phone.errors['required']">Phone is required</small>
+               <small class="text-danger" *ngIf="phone.errors['pattern']">Phone must be at least 11 digit</small>
+           </div>
         </div>
 
         <div class="form-group">
-            <select class="custom-select" name="ddlTopics"[(ngModel)]="userModel.topic" ngModel>
+            <select class="custom-select" name="ddlTopics"[(ngModel)]="userModel.topic" #topic="ngModel" >
                 <option>I'm Interested In ?</option>
                 <option *ngFor="let topic of topics">
                     {{topic}}
@@ -27,11 +36,11 @@
             </select>
         </div>
         <div class="form-check mb-3">
-            <input type="checkbox" class="form-check-input"[(ngModel)]="userModel.chkOffers" name="chkOffers" ngModel>
+            <input type="checkbox" class="form-check-input"[(ngModel)]="userModel.chkOffers" name="chkOffers"  #offers="ngModel">
             <label class="form-check-label">Send me new offers</label>
         </div>
 
-        <input type="submit" class="btn btn-primary" value="SUBMIT">
+        <input type="submit" class="btn btn-primary" value="SUBMIT" [disabled]="userForm.form.invalid">
 
     </form>
 </div>
